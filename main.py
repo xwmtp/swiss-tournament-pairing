@@ -1,25 +1,25 @@
 import json
 import os
 
-from entrant import toEntrant
+from entrant import to_entrant
 from pair_calculator import PairCalculator
 
 USE_START_SEED = True
 
 if __name__ == '__main__':
-    dataPath: str = "./data/entrants_data.json"
-    pairingDataPath: str = "./data/entrants_pairing_data.json"
+    data_path: str = "./data/entrants.json"
+    pairing_data_path: str = "./data/entrants_pairing.json"
 
-    if not os.path.exists(dataPath):
+    if not os.path.exists(data_path):
         raise FileNotFoundError(
-            f"File {dataPath} does not exist, please create it first following entrantData.example.json")
+            f"File {data_path} does not exist, please create it first following entrantData.example.json")
 
-    with open(dataPath) as file:
+    with open(data_path) as file:
         entrantsData = json.load(file)
         file.close()
 
-    if not os.path.exists(pairingDataPath):
-        newEntrantsPairingData = [{
+    if not os.path.exists(pairing_data_path):
+        new_entrants_pairing_data = [{
             "name": entrantData["name"],
             "id": entrantData["id"],
             "start_seed": entrantData["current_seed"],
@@ -28,15 +28,15 @@ if __name__ == '__main__':
             "floated_up": False
         } for entrantData in entrantsData]
 
-        file = open(pairingDataPath, "a")
-        file.write(json.dumps(newEntrantsPairingData, indent=2))
+        file = open(pairing_data_path, "a")
+        file.write(json.dumps(new_entrants_pairing_data, indent=2))
         file.close()
-        print(f"Created {pairingDataPath}")
+        print(f"Created {pairing_data_path}")
 
-    with open(pairingDataPath) as file:
-        entrantsPairingData = json.load(file)
+    with open(pairing_data_path) as file:
+        entrants_pairing_data = json.load(file)
         file.close()
 
-    entrants = [toEntrant(entrantData, entrantsPairingData) for entrantData in entrantsData]
+    entrants = [to_entrant(entrant_data, entrants_pairing_data, USE_START_SEED) for entrant_data in entrantsData]
     pair_calculator = PairCalculator(entrants)
     pair_calculator.pair()

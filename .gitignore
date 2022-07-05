@@ -2,7 +2,7 @@
 
 
 /data/*.json
-!/data/entrants_data.example.json
+!/data/entrants.example.json
 
 /.idea
 

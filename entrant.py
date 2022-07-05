@@ -32,13 +32,13 @@ class Entrant:
         return f"{self.points} {self.name} {self.seed}         {bye} {floated_down} {floated_up}"
 
 
-def toEntrant(entrantData, entrantsPairingData):
-    matchingPairingData = next((e for e in entrantsPairingData if e['id'] == entrantData['id']), None)
+def to_entrant(entrant_data, entrants_pairing_data, use_start_seed: bool):
+    matchingPairingData = next((e for e in entrants_pairing_data if e['id'] == entrant_data['id']), None)
     if matchingPairingData is None:
         raise Exception(
-            f"No matching pairing data found for entrant '{entrantData['name']}' (id: {entrantData[id]})")
-    return Entrant(entrantData['name'], entrantData['id'], entrantData['opponents'],
-                   entrantData['points'], matchingPairingData['received_bye'],
+            f"No matching pairing data found for entrant '{entrant_data['name']}' (id: {entrant_data[id]})")
+    return Entrant(entrant_data['name'], entrant_data['id'], entrant_data['opponents'],
+                   entrant_data['points'], matchingPairingData['received_bye'],
                    matchingPairingData['floated_down'],
                    matchingPairingData['floated_up'],
-                   matchingPairingData['start_seed'] if USE_START_SEED else entrantData['current_seed'])
+                   matchingPairingData['start_seed'] if use_start_seed else entrant_data['current_seed'])
