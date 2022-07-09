@@ -11,10 +11,12 @@ USE_START_SEED = True
 USE_VIRTUAL_POINT = True
 
 if __name__ == '__main__':
+    now_str = datetime.datetime.now().isoformat().replace(':', '_')
     data_path: str = "./data/entrants.json"
     pairing_data_path: str = "./data/entrants_pairing.json"
     output_path = "./data/output"
-    new_pairing_data_path: str = output_path + rf"/entrants_pairing_{datetime.datetime.now().isoformat().replace(':', '_')}.json"
+    new_pairing_data_path: str = output_path + rf"/entrants_pairing_{now_str}.json"
+    new_pairing_results_path: str = output_path + rf"/entrants_pairing_results_{now_str}.json"
 
     if not os.path.exists(data_path):
         raise FileNotFoundError(
@@ -52,11 +54,17 @@ if __name__ == '__main__':
     entrants = [to_entrant(entrant_data, entrants_pairing_data, USE_START_SEED, USE_VIRTUAL_POINT) for entrant_data in
                 entrantsData]
     pair_calculator = PairCalculator(entrants)
-    pair_calculator.pair()
+    pairs = pair_calculator.pair()
 
+    # save new entrant data
     new_entrants_pairing_data = [e.to_new_pairing_data(entrants_pairing_data) for e in entrants]
     if not os.path.exists(output_path):
         os.mkdir(output_path)
     file = open(new_pairing_data_path, "a")
     file.write(json.dumps(new_entrants_pairing_data, indent=2))
+    file.close()
+
+    # save pairs
+    file = open(new_pairing_results_path, "a")
+    file.write(json.dumps(pairs, indent=2))
     file.close()

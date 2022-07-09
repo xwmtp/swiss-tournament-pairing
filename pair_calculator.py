@@ -35,6 +35,7 @@ class PairCalculator:
 
         self.verify_results()
         self.print_results()
+        return [list(set([e.id for e in pair])) for pair in self.pairs]
 
     def award_bye(self):
         if len(self.entrants) % 2 == 0:
