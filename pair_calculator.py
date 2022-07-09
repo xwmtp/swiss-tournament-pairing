@@ -6,7 +6,7 @@ from entrant import Entrant
 class PairCalculator:
 
     def __init__(self, entrants: List[Entrant]):
-        self.entrants: List[Entrant] = entrants
+        self.entrants: List[Entrant] = [e for e in entrants]
         self.original_entrants: List[Entrant] = [e for e in entrants]
         self.pairs: List[Tuple[Entrant, Entrant]] = []
 
@@ -120,16 +120,12 @@ class PairCalculator:
                 print(f"{e1.name} ({e1.points} {e1.seed}) vs {e2.name} ({e2.points} {e2.seed})")
         for e in byes:
             print(f"{e.name} ({e.points} {e.seed}) (bye)")
-        print(f"\nNEW DOWNFLOATERS: {self.current_downfloaters()}")
-        print(f"NEW UPFLOATERS: {self.current_upfloaters()}")
-        print(f"NEW BYES: {self.current_byes()}")
+        print(f"\nNEW DOWNFLOATERS: {[e.name for e in self.current_downfloaters()]}")
+        print(f"NEW UPFLOATERS: {[e.name for e in self.current_upfloaters()]}")
+        print(f"NEW BYES: {[e.name for e in self.current_byes()]}")
 
     def verify_results(self):
         print('\nVerifying results...')
-        print(self.current_byes())
-        print([(e.name, e.received_bye) for e in self.entrants])
-        print([(e.name, e.received_bye) for e in self.original_entrants])
-
         expected_entrants_length = len(self.original_entrants) - len(self.current_downfloaters()) - len(
             self.current_upfloaters()) - len(self.current_byes())
 

@@ -1,7 +1,8 @@
 ### Python template
 
 
-/data/*.json
+/data/
+/data/output/
 !/data/entrants.example.json
 
 /.idea
