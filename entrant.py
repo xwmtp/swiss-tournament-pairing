@@ -7,7 +7,8 @@ class Entrant:
     name: str
     id: str
     opponents: List[str]
-    points: int
+    points: int  # incl virtual point
+    tourney_points: int  # excl virtual point
     received_bye: bool
     floated_down: bool
     floated_up: bool
@@ -55,7 +56,7 @@ def to_entrant(entrant_data, entrants_pairing_data, use_start_seed: bool, use_vi
     if use_virtual_point and matching_pairing_data['virtual_point']:
         points += 1
     return Entrant(entrant_data['name'], entrant_data['id'], entrant_data['opponents'],
-                   points, matching_pairing_data['received_bye'],
+                   points, entrant_data['points'], matching_pairing_data['received_bye'],
                    matching_pairing_data['floated_down'],
                    matching_pairing_data['floated_up'],
                    matching_pairing_data['start_seed'] if use_start_seed else entrant_data['current_seed'])

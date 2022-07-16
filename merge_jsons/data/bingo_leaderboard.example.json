@@ -1,0 +1,81 @@
+{
+  "lastUpdated": "2022-07-16T08:13:04.515264100Z",
+  "numEntries": 5,
+  "entries": [
+    {
+      "playerName": "Ganondorf",
+      "playerId": "VXakOPonPdvDrB8n",
+      "racetimePoints": 3419,
+      "leaderboardScore": 944,
+      "leaderboardTime": "1:08:12",
+      "average": "1:09:36",
+      "effectiveAverage": "1:08:04",
+      "effectiveMedian": "1:08:05",
+      "lastRaced": "2022-07-09T22:40:57.932Z",
+      "finishedRacesCount": 15,
+      "includedRacesCount": 15,
+      "finishedRacesFraction": "15/15",
+      "rank": 1
+    },
+    {
+      "playerName": "Link",
+      "playerId": "gAzO07dQzElG6RvQ",
+      "racetimePoints": 3054,
+      "leaderboardScore": 903,
+      "leaderboardTime": "1:10:34",
+      "average": "1:11:00",
+      "effectiveAverage": "1:10:34",
+      "effectiveMedian": "1:12:03",
+      "lastRaced": "2022-07-16T05:21:43.828Z",
+      "finishedRacesCount": 13,
+      "includedRacesCount": 15,
+      "finishedRacesFraction": "13/15",
+      "rank": 2
+    },
+    {
+      "playerName": "Sheik",
+      "playerId": "qOkXxyE6YNdpPz69",
+      "racetimePoints": 3261,
+      "leaderboardScore": 863,
+      "leaderboardTime": "1:12:54",
+      "average": "1:09:20",
+      "effectiveAverage": "1:08:33",
+      "effectiveMedian": "1:09:41",
+      "lastRaced": "2022-07-14T22:44:06.665Z",
+      "finishedRacesCount": 15,
+      "includedRacesCount": 15,
+      "finishedRacesFraction": "15/15",
+      "rank": 3
+    },
+    {
+      "playerName": "Zelda",
+      "playerId": "xbZJYyoanPj8PMQe",
+      "racetimePoints": 3250,
+      "leaderboardScore": 863,
+      "leaderboardTime": "1:12:57",
+      "average": "1:09:21",
+      "effectiveAverage": "1:08:02",
+      "effectiveMedian": "1:08:51",
+      "lastRaced": "2021-11-27T23:14:24.781Z",
+      "finishedRacesCount": 15,
+      "includedRacesCount": 15,
+      "finishedRacesFraction": "15/15",
+      "rank": 4
+    },
+    {
+      "playerName": "Young Link",
+      "playerId": "PvxTj8PUanQeb3JY",
+      "racetimePoints": 2614,
+      "leaderboardScore": 858,
+      "leaderboardTime": "1:13:12",
+      "average": "1:15:10",
+      "effectiveAverage": "1:13:12",
+      "effectiveMedian": "1:14:44",
+      "lastRaced": "2022-07-14T22:44:06.665Z",
+      "finishedRacesCount": 14,
+      "includedRacesCount": 15,
+      "finishedRacesFraction": "14/15",
+      "rank": 5
+    }
+  ]
+}

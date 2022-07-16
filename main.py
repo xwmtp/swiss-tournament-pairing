@@ -20,15 +20,15 @@ if __name__ == '__main__':
 
     if not os.path.exists(data_path):
         raise FileNotFoundError(
-            f"File {data_path} does not exist, please create it first following entrantData.example.json")
+            f"File {data_path} does not exist, please create it first following entrant.example.json")
 
     with open(data_path) as file:
-        entrantsData = json.load(file)
+        entrants_data = json.load(file)
         file.close()
 
-    entrantsData = sorted(entrantsData,
-                          key=lambda entrantData: (-entrantData['current_seed'], entrantData['name'].lower()))
-    halfLength = math.ceil(len(entrantsData) / 2)
+    entrants_data = sorted(entrants_data,
+                           key=lambda entrantData: (-entrantData['current_seed'], entrantData['name'].lower()))
+    halfLength = math.ceil(len(entrants_data) / 2)
 
     if not os.path.exists(pairing_data_path):
         initial_entrants_pairing_data = [{
@@ -39,7 +39,7 @@ if __name__ == '__main__':
             "floated_down": False,
             "floated_up": False,
             "virtual_point": USE_VIRTUAL_POINT and i < halfLength
-        } for (i, entrantData) in enumerate(entrantsData)]
+        } for (i, entrantData) in enumerate(entrants_data)]
 
         file = open(pairing_data_path, "a")
         file.write(json.dumps(initial_entrants_pairing_data, indent=2))
@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
     # do pairing
     entrants = [to_entrant(entrant_data, entrants_pairing_data, USE_START_SEED, USE_VIRTUAL_POINT) for entrant_data in
-                entrantsData]
+                entrants_data]
     pair_calculator = PairCalculator(entrants)
     pairs = pair_calculator.pair()
 

@@ -1,9 +1,12 @@
 ### Python template
 
 
-/data/
-/data/output/
+data/
+/merge_jsons/data/*.json
 !/data/entrants.example.json
+!/data/entrants_without_seed.example.json
+!/data/bingo_leaderboard.example.json
+
 
 /.idea
 

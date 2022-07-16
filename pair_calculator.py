@@ -35,7 +35,7 @@ class PairCalculator:
 
         self.verify_results()
         self.print_results()
-        return [list(set([e.id for e in pair])) for pair in self.pairs]
+        return self.get_pairs_json()
 
     def award_bye(self):
         if len(self.entrants) % 2 == 0:
@@ -58,7 +58,6 @@ class PairCalculator:
         entrant.give_bye()
         self.pairs.append((entrant, entrant))
         self.entrants.remove(entrant)
-        return
 
     def get_downfloater(self, to_pair: List[Entrant]):
         to_pair = sorted(to_pair, key=lambda e: -e.seed)
@@ -124,6 +123,18 @@ class PairCalculator:
         print(f"\nNEW DOWNFLOATERS: {[e.name for e in self.current_downfloaters()]}")
         print(f"NEW UPFLOATERS: {[e.name for e in self.current_upfloaters()]}")
         print(f"NEW BYES: {[e.name for e in self.current_byes()]}")
+
+    def get_pairs_json(self):
+        json = []
+        for pair in self.pairs:
+            new_pair = []
+            for entrant in pair:
+                if not any(entrant.id == e['id'] for e in new_pair):
+                    new_pair.append(
+                        {'id': entrant.id, 'points': entrant.points, 'tourney_points': entrant.tourney_points,
+                         'seed': entrant.seed})
+            json.append(new_pair)
+        return json
 
     def verify_results(self):
         print('\nVerifying results...')

@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Ganondorf",
+    "id": "VXakOPonPdvDrB8n",
+    "opponents": [
+      "qOkXxyE6YNdpPz69"
+    ],
+    "points": 3,
+    "current_seed": null
+  },
+  {
+    "name": "Link",
+    "id": "gAzO07dQzElG6RvQ",
+    "opponents": [],
+    "points": 3,
+    "current_seed": null
+  },
+  {
+    "name": "Sheik",
+    "id": "qOkXxyE6YNdpPz69",
+    "opponents": [
+      "xbZJYyoanPj8PMQe"
+    ],
+    "points": 0,
+    "current_seed": null
+  },
+  {
+    "name": "Zelda",
+    "id": "xbZJYyoanPj8PMQe",
+    "opponents": [],
+    "points": 0,
+    "current_seed": null
+  },
+  {
+    "name": "Young Link",
+    "id": "PvxTj8PUanQeb3JY",
+    "opponents": [],
+    "points": 0,
+    "current_seed": null
+  }
+]
