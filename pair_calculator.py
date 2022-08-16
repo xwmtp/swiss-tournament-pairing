@@ -10,14 +10,23 @@ class PairCalculator:
         self.original_entrants: List[Entrant] = [e for e in entrants]
         self.pairs: List[Tuple[Entrant, Entrant]] = []
 
-    def current_downfloaters(self):
+    def all_downfloaters(self):
         return [e for e in self.original_entrants if e.floated_down]
+
+    def current_downfloaters(self):
+        return [e for e in self.original_entrants if e.current_float_down]
+
+    def all_upfloaters(self):
+        return [e for e in self.original_entrants if e.current_float_up]
 
     def current_upfloaters(self):
         return [e for e in self.original_entrants if e.floated_up]
 
-    def current_byes(self):
+    def all_byes(self):
         return [e for e in self.original_entrants if e.received_bye]
+
+    def current_byes(self):
+        return [e for e in self.original_entrants if e.current_receive_bye]
 
     def pair(self):
         self.print_entrants(self.entrants)
@@ -94,7 +103,7 @@ class PairCalculator:
         raise Exception(f"Could not find opponent for {e1.name}!")
 
     def pairable(self, entrant: Entrant, opponent: Entrant):
-        if entrant.id in opponent.opponents or opponent.id in entrant.opponents:
+        if entrant.id in opponent.opponentIds or opponent.id in entrant.opponentIds:
             print(f"(Skipping match up {entrant.name} vs {opponent.name}, they already played each other)")
             return False
         if entrant not in self.current_downfloaters():
@@ -120,9 +129,9 @@ class PairCalculator:
                 print(f"{e1.name} ({e1.points} {e1.seed}) vs {e2.name} ({e2.points} {e2.seed})")
         for e in byes:
             print(f"{e.name} ({e.points} {e.seed}) (bye)")
-        print(f"\nNEW DOWNFLOATERS: {[e.name for e in self.current_downfloaters()]}")
-        print(f"NEW UPFLOATERS: {[e.name for e in self.current_upfloaters()]}")
-        print(f"NEW BYES: {[e.name for e in self.current_byes()]}")
+        print(f"\nNEW DOWNFLOATERS: {[e.name for e in self.all_downfloaters()]}")
+        print(f"NEW UPFLOATERS: {[e.name for e in self.all_upfloaters()]}")
+        print(f"NEW BYES: {[e.name for e in self.all_byes()]}")
 
     def get_pairs_json(self):
         json = []
@@ -138,8 +147,7 @@ class PairCalculator:
 
     def verify_results(self):
         print('\nVerifying results...')
-        expected_entrants_length = len(self.original_entrants) - len(self.current_downfloaters()) - len(
-            self.current_upfloaters()) - len(self.current_byes())
+        expected_entrants_length = len(self.original_entrants) - len(self.current_byes())
 
         if (len(self.entrants) is not expected_entrants_length):
             raise Exception(f"Entrants has length {len(self.entrants)} but it should be {expected_entrants_length}")

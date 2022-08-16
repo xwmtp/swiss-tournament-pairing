@@ -6,25 +6,31 @@ from typing import List
 class Entrant:
     name: str
     id: str
-    opponents: List[str]
+    opponentIds: List[str]
     points: int  # incl virtual point
     tourney_points: int  # excl virtual point
     received_bye: bool
     floated_down: bool
     floated_up: bool
+    current_float_down: bool
+    current_float_up: bool
+    current_receive_bye: bool
     seed: int
 
     def float_down(self):
         print(f"[{self.name} FLOATED DOWN!]")
         self.floated_down = True
+        self.current_float_down = True
 
     def float_up(self):
         print(f"[{self.name} FLOATED UP!]")
         self.floated_up = True
+        self.current_float_up = True
 
     def give_bye(self):
         print(f"[{self.name} GETS BYE!]")
         self.received_bye = True
+        self.current_receive_bye = True
 
     def __str__(self):
         bye = "received bye" if self.received_bye else ""
@@ -41,8 +47,8 @@ class Entrant:
             "id": self.id,
             "start_seed": matching_old_pairing_data['start_seed'],
             "received_bye": self.received_bye,
-            "floated_down": self.floated_up,
-            "floated_up": self.floated_down,
+            "floated_down": self.floated_down,
+            "floated_up": self.floated_up,
             "virtual_point": matching_old_pairing_data['virtual_point']
         }
 
@@ -55,8 +61,9 @@ def to_entrant(entrant_data, entrants_pairing_data, use_start_seed: bool, use_vi
     points = entrant_data['points']
     if use_virtual_point and matching_pairing_data['virtual_point']:
         points += 1
-    return Entrant(entrant_data['name'], entrant_data['id'], entrant_data['opponents'],
+    return Entrant(entrant_data['name'], entrant_data['id'], [opponent['id'] for opponent in entrant_data['opponents']],
                    points, entrant_data['points'], matching_pairing_data['received_bye'],
                    matching_pairing_data['floated_down'],
                    matching_pairing_data['floated_up'],
+                   False, False, False,
                    matching_pairing_data['start_seed'] if use_start_seed else entrant_data['current_seed'])

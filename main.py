@@ -7,8 +7,8 @@ from entrant import to_entrant
 from pair_calculator import PairCalculator
 
 # settings
-USE_START_SEED = True
-USE_VIRTUAL_POINT = True
+USE_START_SEED = False
+USE_VIRTUAL_POINT = False
 
 if __name__ == '__main__':
     now_str = datetime.datetime.now().isoformat().replace(':', '_')
