@@ -2,11 +2,17 @@ import json
 
 # pair output files to analyze
 ENTRANTS_PAIRING_RESULT_PATHS = [
-    '../data/output/entrants_pairing_results_1.json'
+    '../data/archive/pairs_round1.json',
+    '../data/archive/pairs_round2.json',
+    '../data/archive/pairs_round3.json',
+    '../data/archive/pairs_round4.json',
 ]
 
 # for converting the ids to actual names
 ENTRANTS_JSON_PATH = '../data/entrants.json'
+
+# DIFF
+USE_DIFF = False
 
 
 def analyze_pair_json(pairs_json, dct):
@@ -20,8 +26,12 @@ def analyze_pair_json(pairs_json, dct):
             dct[p1["id"]] = 0
         if p2["id"] not in dct.keys():
             dct[p2["id"]] = 0
-        dct[p1["id"]] -= diff
-        dct[p2["id"]] += diff
+        if USE_DIFF:
+            dct[p1["id"]] -= diff
+            dct[p2["id"]] += diff
+        else:
+            dct[p1["id"]] += p2["seed"]
+            dct[p2["id"]] += p1["seed"]
     return dct
 
 
@@ -52,8 +62,8 @@ if __name__ == '__main__':
 
     # take average
     for player in seed_diff_names_dict:
-        seed_diff_names_dict[player] /= len(ENTRANTS_PAIRING_RESULT_PATHS)
+        seed_diff_names_dict[player] = round(seed_diff_names_dict[player] / len(ENTRANTS_PAIRING_RESULT_PATHS))
 
     # print (use -x[1] to reverse sort)
-    for key, value in sorted(seed_diff_names_dict.items(), key=lambda x: x[1]):
-        print(f"{key}: {value}")
+    for key, value in sorted(seed_diff_names_dict.items(), key=lambda x: -x[1]):
+        print(f"\t{key}\t\t\t{value}")
